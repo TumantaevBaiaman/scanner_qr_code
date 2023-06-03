@@ -1,12 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import HomeScreen from './pages/HomeScreen';
+import ScannerScreen from './pages/ScannerScreen';
+import ResultScreen from './pages/ResultScreen';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen 
+            name="Home" 
+            component={HomeScreen} 
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="home" size={size} color={color} />
+              ),
+            }} 
+        />
+        <Tab.Screen 
+            name="Scanner" 
+            component={ScannerScreen}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="scan-outline" size={size} color={color} />
+              ),
+            }}  
+        />
+        <Tab.Screen 
+            name="Result" 
+            component={ResultScreen}
+            options={{
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="checkmark-done-circle-outline" size={size} color={color} />
+              ),
+            }}  
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
